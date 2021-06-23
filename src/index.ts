@@ -1,3 +1,10 @@
-export default class Demo{
-    
-}
+
+
+
+import print from './print/index';
+
+
+
+export default {
+    print
+} 
