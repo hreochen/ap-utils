@@ -1,0 +1,29 @@
+{
+  "name": "ap-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/ap-utils.umd.js",
+  "module": "dist/ap-utils.es5.js",
+  "typings": "dist/types/ap-utils.d.ts",
+  "scripts": {
+    "prebuild":"rimraf dist",
+    "start": "rollup -c rollup.config.ts -w",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/quadrakill/ap-utils.git"
+  },
+  "author": "quadrakill",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "lodash.camelcase": "^4.3.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.52.2",
+    "typescript": "^4.3.4"
+  }
+}
