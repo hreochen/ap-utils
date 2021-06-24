@@ -8,15 +8,16 @@ interface opts {
   sheetName: string;
 }
 
-let printFrame: any;
+let printFrame: HTMLIFrameElement | null;
 
 export default function print(opts: opts) {
   let content = createHtmlPage(opts);
   const blob = getExportBlobByContent(content, opts);
   if (!printFrame) {
     printFrame = createFrame();
-    printFrame.onload = (evnt: any) => {
+    printFrame.onload = (evnt:any) => {
       if (evnt.target.src) {
+        evnt.target.contentWindow.onafterprint = afterPrintEvent
         evnt.target.contentWindow.print();
       }
     };
@@ -57,8 +58,8 @@ function removePrintFrame() {
   if (printFrame) {
     if (printFrame.parentNode) {
       try {
-        printFrame.contentDocument.write("");
-        printFrame.contentDocument.clear();
+        printFrame.contentDocument&&printFrame.contentDocument.write("");
+        printFrame.contentDocument&&printFrame.contentDocument.clear();
       } catch (e) {}
       printFrame.parentNode.removeChild(printFrame);
     }
@@ -66,8 +67,12 @@ function removePrintFrame() {
   }
 }
 
+function afterPrintEvent () {
+  removePrintFrame()
+}
+
 function appendPrintFrame() {
-  if (!printFrame.parentNode) {
+  if (printFrame&&!printFrame.parentNode) {
     document.body.appendChild(printFrame);
   }
 }
