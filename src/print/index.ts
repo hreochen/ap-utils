@@ -4,7 +4,7 @@ const defaultHtmlStyle =
 interface opts {
   html: string;
   style: string;
-  type: string;
+  type: "html";
   sheetName: string;
 }
 
@@ -15,9 +15,9 @@ export default function print(opts: opts) {
   const blob = getExportBlobByContent(content, opts);
   if (!printFrame) {
     printFrame = createFrame();
-    printFrame.onload = (evnt:any) => {
+    printFrame.onload = (evnt: any) => {
       if (evnt.target.src) {
-        evnt.target.contentWindow.onafterprint = afterPrintEvent
+        evnt.target.contentWindow.onafterprint = afterPrintEvent;
         evnt.target.contentWindow.print();
       }
     };
@@ -34,7 +34,7 @@ function createFrame() {
 
 function getExportBlobByContent(content: string, opts: opts): Blob | null {
   if (window.Blob) {
-    return new Blob([content], { type: `text/${opts.type}` });
+    return new Blob([content], { type: `text/${opts.type || "html"}` });
   }
   return null;
 }
@@ -58,8 +58,8 @@ function removePrintFrame() {
   if (printFrame) {
     if (printFrame.parentNode) {
       try {
-        printFrame.contentDocument&&printFrame.contentDocument.write("");
-        printFrame.contentDocument&&printFrame.contentDocument.clear();
+        printFrame.contentDocument && printFrame.contentDocument.write("");
+        printFrame.contentDocument && printFrame.contentDocument.clear();
       } catch (e) {}
       printFrame.parentNode.removeChild(printFrame);
     }
@@ -67,12 +67,12 @@ function removePrintFrame() {
   }
 }
 
-function afterPrintEvent () {
-  removePrintFrame()
+function afterPrintEvent() {
+  removePrintFrame();
 }
 
 function appendPrintFrame() {
-  if (printFrame&&!printFrame.parentNode) {
+  if (printFrame && !printFrame.parentNode) {
     document.body.appendChild(printFrame);
   }
 }

@@ -1,13 +1,17 @@
 {
   "name": "@herochen/ap-utils",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "工具函数合集",
   "main": "dist/ap-utils.umd.js",
   "module": "dist/ap-utils.es5.js",
   "typings": "dist/types/ap-utils.d.ts",
-  "keywords": ["function","tools","print"],
+  "keywords": [
+    "function",
+    "tools",
+    "print"
+  ],
   "scripts": {
-    "prebuild":"rimraf dist",
+    "prebuild": "rimraf dist",
     "start": "rollup -c rollup.config.ts -w",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts"
   },
