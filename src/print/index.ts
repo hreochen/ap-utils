@@ -10,6 +10,13 @@ interface opts {
 
 let printFrame: HTMLIFrameElement | null;
 
+/**
+ * 打印html
+ * @param opts.html html字符串
+ * @param opts.style 样式字符串
+ * @param opts.type 类型默认html
+ * @param opts.sheetName html标题
+ */
 export default function print(opts: opts) {
   let content = createHtmlPage(opts);
   const blob = getExportBlobByContent(content, opts);
