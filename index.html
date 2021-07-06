@@ -17,10 +17,22 @@
     </style>
   </head>
   <body>
+    <div class="app">
+      <div class="app_item">111</div>
+      <div class="app_item">111</div>
+      <div class="app_item">111</div>
+      <div class="app_item">111</div>
+      <div class="app_item">111</div>
+    </div>
     <script src="./dist/ap-utils.umd.js"></script>
     <script>
+      let d = document.createElement("div");
+      d.appendChild(document.querySelector(".app").cloneNode(true));
+      let str = d.innerHTML;
       let opts = {
-        html: "<div>1</div>",
+        html: str,
+        style: ".app{font-size:20px;}",
+        sheetName: "Alice",
       };
       apUtils.print(opts);
     </script>
