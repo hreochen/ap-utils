@@ -46,7 +46,7 @@ function getExportBlobByContent(content: string, opts: opts): Blob | null {
   return null;
 }
 
-function createHtmlPage(opts: opts) {
+export function createHtmlPage(opts: opts) {
   const { style } = opts;
   return [
     "<!DOCTYPE html><html>",
