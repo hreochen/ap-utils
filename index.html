@@ -21,6 +21,8 @@
       <div class="app_item">111</div>
       <div class="app_item">111</div>
       <div class="app_item">111</div>
+      <div class="page"></div>
+      <div class="app_item noPrint">222222</div>
       <div class="app_item">111</div>
       <div class="app_item">111</div>
     </div>
@@ -29,8 +31,20 @@
       let d = document.createElement("div");
       d.appendChild(document.querySelector(".app").cloneNode(true));
       let str = d.innerHTML;
+
+      let html = `
+      <div class="app">
+      <div class="app_item">111</div>
+      <div class="app_item">111</div>
+      <div class="app_item">111</div>
+      <div class="page"></div>
+      <div class="app_item noPrint">222222</div>
+      <div class="app_item">111</div>
+      <div class="app_item">111</div>
+    </div>
+      `
       let opts = {
-        html: str,
+        html,
         style: ".app{font-size:20px;}",
         sheetName: "Alice",
       };
