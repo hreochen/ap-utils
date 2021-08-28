@@ -66,8 +66,8 @@ export function throttle(fn: Function, wait: number) {
   let throttleTimer: number;
   return function fn1(...args: any[]) {
     if (!throttleTimer) {
+      fn.apply(fn1, args);
       throttleTimer = window.setTimeout(() => {
-        fn.apply(fn1, args);
         window.clearTimeout(throttleTimer);
       }, wait);
     }
