@@ -2,11 +2,10 @@ const defaultHtmlStyle =
   'body{margin:0;color:#333333;font-size:14px;font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu}body *{-webkit-box-sizing:border-box;box-sizing:border-box} .page {page-break-after: always;}.noPrint {display: none;}';
 
 
-type Type = 'html'|'htm'
 interface opts {
   html: string;
   style: string;
-  type: Type;
+  type: 'html'|'htm';
   sheetName: string;
 }
 

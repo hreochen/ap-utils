@@ -6,9 +6,9 @@
  * @returns
  */
 export function once(fn: Function | null) {
-  return function fn1(...args: any[]) {
+  return function (this:any,...args: any[]) {
     if (fn) {
-      let ret = fn.apply(fn1, args);
+      let ret = fn.apply(this, args);
       fn = null;
       return ret;
     }
@@ -27,10 +27,10 @@ export function intercept(
   fn: Function,
   { beforeCall, afterCall }: { beforeCall?: Function; afterCall?: Function }
 ) {
-  return function fn1(...args: any[]) {
-    if (!beforeCall || beforeCall.call(fn1, args) != false) {
-      let ret = fn.apply(fn1, args);
-      if (afterCall) return afterCall.call(fn1, ret);
+  return function (this:any,...args: any[]) {
+    if (!beforeCall || beforeCall.call(this, args) != false) {
+      let ret = fn.apply(this, args);
+      if (afterCall) return afterCall.call(this, ret);
       return ret;
     }
   };
@@ -46,10 +46,10 @@ export function intercept(
  */
 export function debounce(fn: Function, wait: number) {
   let debounceTimer: number;
-  return function fn1(...args: any[]) {
+  return function (this:any,...args: any[]) {
     if (debounceTimer) window.clearTimeout(debounceTimer);
     debounceTimer = window.setTimeout(() => {
-      fn.apply(fn1, args);
+      fn.apply(this, args);
     }, wait);
   };
 }
@@ -64,9 +64,9 @@ export function debounce(fn: Function, wait: number) {
  */
 export function throttle(fn: Function, wait: number) {
   let throttleTimer: number;
-  return function fn1(...args: any[]) {
+  return function (this:any,...args: any[]) {
     if (!throttleTimer) {
-      fn.apply(fn1, args);
+      fn.apply(this, args);
       throttleTimer = window.setTimeout(() => {
         window.clearTimeout(throttleTimer);
       }, wait);
