@@ -1,12 +1,15 @@
 const defaultHtmlStyle =
-  'body{margin:0;color:#333333;font-size:14px;font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu}body *{-webkit-box-sizing:border-box;box-sizing:border-box}';
+  'body{margin:0;color:#333333;font-size:14px;font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu}body *{-webkit-box-sizing:border-box;box-sizing:border-box} .page {page-break-after: always;}.noPrint {display: none;}';
+
 
 interface opts {
   html: string;
   style: string;
-  type: "html";
+  type: 'html'|'htm';
   sheetName: string;
 }
+
+
 
 let printFrame: HTMLIFrameElement | null;
 
@@ -17,7 +20,7 @@ let printFrame: HTMLIFrameElement | null;
  * @param opts.type 类型默认html
  * @param opts.sheetName html标题
  */
-export default function print(opts: opts) {
+export default function print(opts: opts):void {
   let content = createHtmlPage(opts);
   const blob = getExportBlobByContent(content, opts);
   if (!printFrame) {
@@ -46,7 +49,7 @@ function getExportBlobByContent(content: string, opts: opts): Blob | null {
   return null;
 }
 
-function createHtmlPage(opts: opts) {
+export function createHtmlPage(opts: opts) {
   const { style } = opts;
   return [
     "<!DOCTYPE html><html>",

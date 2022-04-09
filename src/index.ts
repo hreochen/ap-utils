@@ -1,12 +1,13 @@
 
 
 
-import print from '@/print/index';
-import * as utils from '@/utils/index';
+import print from './print/index';
+import * as utils from './utils/index';
 
 
 
-export default {
+
+export {
     print,
     utils
 } 
